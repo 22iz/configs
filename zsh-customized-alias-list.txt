@@ -1,0 +1,81 @@
+# Customized alias
+
+alias py="python"
+
+alias pys="python server.py"
+
+alias pysa="python server.py --src='adm'"
+
+alias pysi="python server.py --src='idx'"
+
+alias pysp="python server.py --src='pub'"
+
+alias gpc="git push cb"
+
+alias glc="git pull cb"
+
+alias gpcm="git push cb master"
+
+alias glcm="git pull cb master"
+
+alias gpca="git push cb ace"
+
+alias glca="git pull cb ace"
+
+alias gpcj="git push cb jack"
+
+alias glcj="git pull cb jack"
+
+alias gpcp="git push cb prod"
+
+alias glcp="git pull cb prod"
+
+alias gpcd="git push cb dev"
+
+alias glcd="git pull cb dev"
+
+alias gii="git init"
+
+alias gra="git remote add"
+
+alias cdj="cd ~/Documents/cb/jack"
+
+alias cdi="cd ~/Documents/cb/apiCB"
+
+alias cdw="cd ~/Documents/cb/webCB"
+
+alias cda="cd ~/Documents/cb/algo"
+
+alias cdwa="cd ~/Documents/cb/webCB/server_websites/adm"
+
+alias cdwi="cd ~/Documents/cb/webCB/server_websites/idx"
+
+alias cdwp="cd ~/Documents/cb/webCB/server_websites/pub"
+
+alias s.="subl ."
+
+alias incs="ionic serve"
+
+alias ipri="ionic platforms rm ios"
+
+alias ipai="ionic platforms add ios"
+
+alias ibi="ionic build ios"
+
+alias gibi="gulp && ionic build ios"
+
+alias irid="ionic run ios --device"
+
+alias iridl="ionic run ios --device -lcs"
+
+alias pyshs="py -m SimpleHTTPServer"
+
+alias gus="gulp script"
+
+alias guw="gulp watch"
+
+alias corp="cordova plugins"
+
+alias corpr="cordova plugin rm"
+
+alias corpa="cordova plugin add"
