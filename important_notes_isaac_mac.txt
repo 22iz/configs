@@ -1,0 +1,175 @@
+postgres://uanjdzyaobyqwh:WTX-O46zXiLhudxrcNMYzpLq3O@ec2-23-21-161-153.compute-1.amazonaws.com:5432/d5ambc3o8mmh4e
+
+bundle exec rerun --background --dir app,db,lib --pattern '{**/*.rb}' -- bundle exec sidekiq --verbose
+
+download mysql community server in mysql official website for mac
+sudo /usr/local/mysql/support-files/mysql.server start
+sudo /usr/local/mysql/support-files/mysql.server stop
+sudo /usr/local/mysql/support-files/mysql.server restart
+sudo ln -s /usr/local/mysql/support-files/mysql.server /usr/bin/mysql-server #to start mysql-server need sudo: sudo mysql-server start/stop/restart
+# mysql command line
+sudo ln -s /usr/local/mysql/mysql/bin/mysql /usr/bin/mysql
+mysql -u root
+mysql> GRANT ALL PRIVILEGES ON *.* TO root@localhost IDENTIFIED BY "123456";
+show variables;
+
+# python mysql
+sudo pip install MySQLdb-python
+# if failed on can't find mysql_config, need to add the path of it into site.cfg
+sudo find / -name 'mysql_config'
+sudo ln -s /usr/local/mysql-5.6.22-osx10.8-x86_64/bin/mysql_config /usr/bin/mysql_config
+
+>>> #导入模块
+>>> import MySQLdb
+
+
+>>> #连接数据库
+>>> conn = MySQLdb.connect(host="localhost",user="root",passwd="123123",db="qiwsirtest",port=3036,charset="utf8")
+or conn = MySQLdb.connect(host="localhost",user="root",passwd="123123", port=3036,charset="utf8")
+   conn.select_db("qiwsirtest")
+
+
+>>> #建立指针
+>>> cur = conn.cursor()
+or cur = conn.cursor(cursorclass=MySQLdb.cursors.DictCursor) 
+	# when query can use dict attribute like 
+	cur.execute("select * from users")
+	lines = cur.fetchall()
+	for line in lines:
+		print line["username"]
+
+# 建立数据库
+>>> cur = conn.cursor()
+>>> cur.execute("create database newtest")
+
+# 建立数据表
+mysql> create table users(id int(2) not null primary key auto_increment,username varchar(40),password text,email text)default charset=utf8;
+
+# 删除数据库或数据表
+DROP TABLE IF EXISTS database_name
+DROP TABLE IF EXISTS table_name
+
+>>> #插入记录
+>>> cur.execute("insert into users (username,password,email) values (%s,%s,%s)",("aaaaa","a","aaaaa@gmail.com"))
+1L
+
+#查询
+cur.execute("select * from users")
+cur.fetchall()
+cur.fetchone()
+cur.fetchmany(size)
+cur.scroll(value, mode="relative" or "absolute")
+
+#更新
+cur.execute("update users set username=%s where id=2",("mypython"))
+or cur.execute("update users set username='mypython' where id=2" ###### 注意username='' 要用单引号
+
+>>> #提交保存
+###### 建立数据库和数据表不需要 commit()
+###### 在 commit() 之前，cur.execute() 可以进行查询新的数据，只是还没存进数据库
+>>> conn.commit()
+
+>>> #rollback
+>>> conn.rollback()
+
+##### 关闭连接
+cur.close()
+conn.close()
+
+#encoding=utf-8
+
+import sys
+import MySQLdb
+
+reload(sys)
+sys.setdefaultencoding('utf-8')
+
+db=MySQLdb.connect(user='root',charset='utf8') 
+
+linux
+
+创建用户 feilong
+# -d 指定目录 -m没有就创建
+useradd -d /home/feilong -m feilong
+passwd feilong 
+＃设置密码
+
+#将新用户加入 sudoers
+用root下，vim /etc/sudoers
+在root    ALL=(ALL:ALL) ALL 下面添加一行
+    feilong    ALL=(ALL)ALL
+并且强行保存 :wq!
+
+#ssh
+保证本地与服务器 /home/feilong 下都有 ssh-keygen 创建的 .ssh 文件夹（包含公钥和私钥）
+本地 for mac：scp ~/.ssh/id_rsa.pub feilong@120.24.224.48:~/.ssh/authorized_keys
+for linux: ssh-copy-id feilong@120.24.224.48
+＃在本地用根用户远程登录
+ssh root@120.24.224.48
+# 用某个用户远程登录 就不用再填密码了
+ssh feilong@120.24.224.48
+
+#传输数据 rsync
+＃传输文件夹
+rsync -r tornado_projects feilong@120.24.224.48
+＃本地添加的文件同步到服务器
+rsync -av tornado_projects/ feilong@120.24.224.48:tornado_projects/
+＃本地添加和删除的文件同步到服务器
+rsync -av --delete tornado_projects/ feilong@120.24.224.48:tornado_projects/
+＃检测本地添加和删除的文件是否正确后再进行同步到服务器
+rsync -av --delete tornado_projects/ feilong@120.24.224.48:tornado_projects/ —dry-run
+
+
+mac:~ juven$ brew search wget
+wget
+mac:~ juven$ port search wget
+wget @1.13.4 (net, www)
+internet file retriever
+
+./configure
+make
+sudo make install
+
+$redis = Redis.new(:host => 'localhost', :port => 6379)
+
+defaults write com.apple.finder AppleShowAllFiles False
+defaults write com.apple.finder AppleShowAllFiles True
+killall Finder
+
+127.0.0.1 lmlicenses.wip4.adobe.com
+127.0.0.1 lm.licenses.adobe.com
+127.0.0.1 activate.adobe.com
+127.0.0.1 practivate.adobe.com
+
+rails g migration AddSomeTotalSumToDetailedCashFlowAnalyses
+rails c
+
+git status
+git stash
+git add
+git reset
+git checkout
+git log
+git branch -a
+git fetch
+git checkout -b NEW_BRANCH_NAME
+git branch -D BRANCH_NAME
+
+## after commit the branch to be merged: like at the branch 'commodity_grade_yearly', git commit -m "add commodity grade.."
+git checkout --track origin/detailed
+git pull origin detailed
+git merge commodity_grade_yearly
+## solve the conflict and then commit
+
+git checkout --track origin/staging
+git merge detailed
+##solve the conflict and then commit
+## after add SSH keys to heruko: heroku keys:add
+git remote add staging git@heroku.com:thecloudminer-staging.git
+git push origin staging
+git push staging staging:master
+heroku run rake db:migrate
+heroku logs -t -a thecloudminer-staging
+heroku log
+
+http://p.getqujing.com/paths/6oqcr0cf.pac
